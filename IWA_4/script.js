@@ -5,7 +5,7 @@ let count = 0;
 if (date === 2050) {
     console.log("January", 'New Year’s Day');
     console.log("March", 'Human Rights Day');
-    date = 'April';
+    //date = 'April';
     console.log(date, 'Family Day');
     console.log(date, 'Freedom Day');
     count = count + 4;
@@ -17,7 +17,7 @@ if (date === 2050) {
 
     console.log('August', 'Women’s Day');
     console.log('September', 'Heritage Day');
-    date = 'December';
+    //date = 'December';
     console.log(date, 'Day of Reconciliation');
     count = count + 3;
 
