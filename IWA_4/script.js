@@ -2,7 +2,6 @@ let date = 2050;
 let status = 'parent';
 let count = 0;
 
-
 if (date === 2050) {
     console.log("January", 'New Year’s Day');
     console.log("March", 'Human Rights Day');
