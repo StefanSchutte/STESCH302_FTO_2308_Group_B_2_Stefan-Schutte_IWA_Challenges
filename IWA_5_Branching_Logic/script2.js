@@ -1,5 +1,5 @@
 const FREE_WARNING = 'Free shipping only applies to single customer orders';
-const BANNED_WARNING = 'Unfortunately, we do not ship to your country of residence';
+const BANNED_WARNING= 'Unfortunately, we do not ship to your country of residence';
 
 const prices = {
     shoes: 300,
@@ -10,7 +10,7 @@ const prices = {
 };
 
 //calculate shipping
-function calculateShipping(location, totalCost, customerCount) {
+function calculateShipping(location, totalCost, customers) {
     if (location === 'NK') {
         console.log(BANNED_WARNING);
         return;
@@ -25,16 +25,16 @@ function calculateShipping(location, totalCost, customerCount) {
         shipping = 800;
     }
 
-    //shipping conditions
-    if ((location === 'RSA' || location === 'NAM') && totalCost >= 1000 && customerCount === 1) {
+    //shipping conditions, check if it should be free
+    if ((location === 'RSA' || location === 'NAM') && totalCost >= 1000 && customers === 1) {
         shipping = 0;
-    } else if (shipping === 0 && customerCount !== 1) {
+    } else if (shipping === 0 && customers !== 1) {
         console.log(FREE_WARNING);
         // Reset shipping to default if conditions are not met
         shipping = (location === 'RSA') ? 400 : 600;
     }
 
-    return shipping;
+    return shipping;//holds shipping cost
 }
 
 //handle the purchase logic
@@ -54,8 +54,8 @@ function processPurchase(customers, location) {
     }
 }
 
-const customerCount = 1;
+const customers = 1;
 const customerLocation = 'RSA';
 
-processPurchase(customerCount, customerLocation);
+processPurchase(customers, customerLocation);
 

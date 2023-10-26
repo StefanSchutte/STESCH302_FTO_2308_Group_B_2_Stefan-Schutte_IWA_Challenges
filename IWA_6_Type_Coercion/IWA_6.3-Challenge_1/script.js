@@ -7,6 +7,7 @@ const secondaryPhone = '0219131568'
 function isNumberString (number) {
     return !isNaN(Number(number));
 }
+//parseInt
 
 const primaryValid =  isNumberString(primaryPhone)
 const secondaryValid = isNumberString(secondaryPhone)
