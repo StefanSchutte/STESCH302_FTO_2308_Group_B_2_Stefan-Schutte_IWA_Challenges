@@ -53,20 +53,27 @@ const futureId = 9
 
 // Do not change code above this comment
 
-console.log(holidays.futureId.name || 'ID {futureId} not created yet')
+if (holidays[futureId]) {
+    console.log(holidays[futureId].name) }
+else{console.log(`ID ${futureId} not created yet`)}
 
-copied = holidays.christmas
+
+let copied = holidays.date = new Date(`${holidays.date} ${currentYear}`)
+console.log(copied)
+console.log(christmas);
 copied = { name: 'X-mas Day' }
-correctDate = copied.date
-correctDate.hours = 0
-correctDate.minutes = 0
-isEarlier = copied.date < holidays[6].date
+console.log((copied).name)
+let correctDate = new Date(copied.date)
+correctDate.setHours(0 , 0)
+//console.log(correctDate);
+let isEarlier = copied.date < holidays[christmas].date
 console.log('New date is earlier:', isEarlier)
 if (isEarlier) copied.date = correctDate
-console.log('ID change:', holidays[christmas].id != copied.id || copied.id)
-console.log('Name change:', holidays[christmas].name != copied.name || copied.name)
-console.log('Date change:', holidays[christmas].date != copied.date || copied.date)
-
+{
+    console.log('ID change:', holidays[christmas].id !== copied.id || copied.id)
+    console.log('Name change:', holidays[christmas].name !== copied.name || copied.name)
+    console.log('Date change:', holidays[christmas].date !== copied.date || copied.date)
+}
 const firstHolidayTimestamp = Math.min(
     holidays[0].date.getTime,
     holidays[1].date.getTime,
@@ -96,8 +103,8 @@ const firstMonth = firstHolidayTimestamp.getMonth
 const lastDay = lastHolidayTimestamp.getDate
 const lastMonth = lastHolidayTimestamp.getMonth
 
-console.log('{firstDay}/{firstMonth}/{currentYear}')
-console.log('{lastDay}/{lastMonth}/{currentYear}')
+console.log(`${firstDay}/${firstMonth}/${currentYear}`)
+console.log(`${lastDay}/${lastMonth}/${currentYear}`)
 
-const randomHoliday = holidays[Math.random]
-console.log(randomHoliday.date)
+const randomHoliday = holidays[Math.random()]
+console.log(randomHoliday)//.date

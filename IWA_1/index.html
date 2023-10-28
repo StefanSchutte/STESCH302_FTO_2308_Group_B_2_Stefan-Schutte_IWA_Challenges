@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tally_Count</title>
+
+    <link rel="stylesheet" href="/styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;900&display=swap" rel="stylesheet">
+
+
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>-->
+
+
+
+<!--javaScript-->
+   <script  src="/scripts.js" defer></script>
+<!--    <script  src="/code-a.js" defer></script>-->
+<!--    <script  src="/code-b.js" type="module" defer></script>-->
+
+<!--    <script src="/scripts.js" async></script>-->
+
+<!--    <script src="/fallback.js" nomodule></script>-->
+
+</head>
+<body>
+
+<script async >console.log('helo')</script>
+
+<header class="header">
+    <h1 class="header_title">
+        Tally Count
+    </h1>
+</header>
+
+<noscript>
+    <p class="error">this app requires javascript to work</p>
+</noscript>
+
+<aside class="controls">
+    <label>
+        <span>Display</span>
+        <select>
+            <option>Single</option>
+            <option>Multiple</option>
+        </select>
+    </label>
+
+    <label>
+        <span>Counter</span>
+        <select>
+            <option>Counter 1</option>
+            <option>Counter 2</option>
+            <option>Counter 3</option>
+        </select>
+    </label>
+
+    <button>Settings</button>
+
+</aside>
+<main class="counter">
+
+    <input class="counter_value" data-key="number" readonly value="0">
+        <div class="counter_actions">
+            <button data-key='subtract' class="counter_button counter_button_first">-</button>
+            <button data-key='add' class="counter_button">+</button>
+        </div>
+</main>
+
+<footer class="footer">
+    Inspired by <a class="footer_link" href="https://tallycount.app/">Tally Count</a>. Note this is a practice project for learning JavaScript.
+</footer>
+
+<!--<script src="/scripts.js"></script>-->
+</body>
+</html>
