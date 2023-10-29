@@ -1,0 +1,92 @@
+<!--<script>
+    const window = {
+        document: /*html*/{
+head:{
+
+}, body:{
+    head:{
+        header:{},
+        h1:{},
+    },
+                Main:{},
+                input:{},
+                div:{
+                    button:{}
+                },
+            }
+        }
+    }
+
+    //window.document.body
+    //querySelector('');
+    //querySelectorAll('');
+</script>
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src="documentObjectModel.js" defer></script>
+
+    <title>DOM</title>
+</head>
+<body>
+<div>
+    Example
+</div>
+
+<header class="header">
+    <h1 class="header_title">
+        Tally Count
+    </h1>
+</header>
+
+
+
+<aside class="controls">
+    <label>
+        <span>Display</span>
+        <select>
+            <option>Single</option>
+            <option>Multiple</option>
+        </select>
+    </label>
+
+    <label>
+        <span>Counter</span>
+        <select>
+            <option>Counter 1</option>
+            <option>Counter 2</option>
+            <option>Counter 3</option>
+        </select>
+    </label>
+
+    <button>Settings</button>
+
+</aside>
+<main class="counter">
+
+    <input class="counter_value" data-key="number" readonly value="0">
+
+    <div class="counter_actions">
+        <button
+
+                schalk = '123'
+                data-key="subtract"
+
+                data-key='subtract' class="counter_button counter_button_first">-</button>
+        <button data-key='add' class="counter_button">+</button>
+    </div>
+</main>
+
+<footer class="footer">
+    Inspired by <a class="footer_link" href="https://tallycount.app/">Tally Count</a>. Note this is a practice project for learning JavaScript.
+</footer>
+
+</body>
+</html>
