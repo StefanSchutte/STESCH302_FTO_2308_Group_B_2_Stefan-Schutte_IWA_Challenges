@@ -12,7 +12,7 @@ const divider = '----------------------------------'
 
 //const owed = (Math.abs(leoBalance) + Math.abs(sarahBalance)).toFixed(2);
 const owed = parseFloat(-leoBalance -sarahBalance).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")//negate a negative number
-const leo = `${leoName} ${leoSurname} (Owed: R${-sarahBalance})`
+const leo = `${leoName} ${leoSurname} (Owed: R${-leoBalance})`
 const sarah = `${sarahName} ${sarahSurname} (Owed: R${-sarahBalance})`
 const total = `  Total amount owed: R`
 const result =

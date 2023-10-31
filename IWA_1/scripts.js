@@ -4,54 +4,105 @@
 //global consts
 const MAX_NUMBER = 15;
 const MIN_NUMBER = -5;
-const STEP_AMOUNT = 5;
+const STEP_AMOUNT = 1;
 
-const number = document.querySelector('[data-key="number"]');
-const subtract = document.querySelector('[data-key="subtract"]');
-const add = document.querySelector('[data-key="add"]');
+
+//object style
+const elements = {
+    number : document.querySelector('[data-key="number"]'),
+    subtract : document.querySelector('[data-key="subtract"]'),
+    add : document.querySelector('[data-key="add"]'),
+}
+
+
+//Style Object
+
+//document.querySelector('button').disabled
+//document.querySelector('input').readOnly = true
+//document.querySelector('input').focus()
+const updateColor = () => {
+    //console.log(window.document.body.style)
+    //cssom
+    //constructable Stylesheets
+//document.querySelector('[data-key="subtract"]').dataset
+//document.querySelector('[data-key="subtract"]').style
+
+    const value = parseInt(elements.number.value)
+    //const isEdge = value >= MAX_NUMBER || value <= MIN_NUMBER
+/*
+    if (isEdge){
+        elements.number.style.color = 'red';
+    } else {
+        elements.number.style.color = ''//set to empty string to go back way it was
+    }
+*/
+    //elements.subtract.style.background = 'red'
+    //elements.add.style.background = 'red'
+
+    //second ex
+
+    const colorStepsAmount =250 / ( MAX_NUMBER - MIN_NUMBER )
+    //console.log(colorStepsAmount);
+
+    const distMax = MAX_NUMBER - value
+    const distMin = value - MIN_NUMBER
+
+    const red = distMax * colorStepsAmount
+    const green = distMin * colorStepsAmount
+
+    elements.number.style.color = `rgb(${red}, ${green} , 0)`
+
+}
+
+
 
 //console.log(number, subtract, add)
 
 const subtractHandler = () => {
-    console.log('subtract was clicked', subtract);
-    const newValue = parseInt(number.value ) - STEP_AMOUNT;
-    number.value = newValue;
+    //console.log('subtract was clicked', subtract);
+    const newValue = parseInt(elements.number.value ) - STEP_AMOUNT;
+    elements.number.value = newValue;
 
-    if (add.disabled ){
-        add.disabled = false;
+    if (elements.add.disabled ){
+        elements.add.disabled = false;
     }
 
     if (newValue <= MIN_NUMBER){
-        subtract.disabled = true;
+        elements.subtract.disabled = true;
     }
     //else{
     //    subtract.disabled = false;
     //}
+
+    updateColor()
 }
 const addHandler = () => {
 
     //number.value == 10;
 
     console.log('add was clicked');
-    const newValue = parseInt(number.value) + STEP_AMOUNT;
-    number.value = newValue;
+    const newValue = parseInt(elements.number.value) + STEP_AMOUNT;
+    elements.number.value = newValue;
 
     //conditional logic
 
-    if (subtract.disabled){
-        subtract.disabled = false;
+    if (elements.subtract.disabled){
+        elements.subtract.disabled = false;
     }
 
     if (newValue >= MAX_NUMBER){
-        add.disabled = true;
+        elements.add.disabled = true;
     }
     //else{
     //    add.disabled = false;
     //}
+    updateColor()
 }
 
 // parseInt('123')
 //(123).toString()
 
-subtract.addEventListener('click', subtractHandler);
-add.addEventListener('click', addHandler);
+elements.subtract.addEventListener('click', subtractHandler);
+elements.add.addEventListener('click', addHandler);
+
+updateColor()
