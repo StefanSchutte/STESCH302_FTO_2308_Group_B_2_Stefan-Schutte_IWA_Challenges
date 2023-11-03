@@ -61,11 +61,11 @@ else{console.log(`ID ${futureId} not created yet`)}
 let copied = { ...holidays[christmas]}
 //console.log(copied);
 copied.name = 'X-mas Day'
-
+//
 
 //
 const correctDate = new Date(copied.date)
-correctDate.setHours(0 , 0, 0, 0);
+correctDate.setUTCHours(0 , 0, 0, 0);
 //console.log(correctDate);
 
 let isEarlier = copied.date > correctDate
