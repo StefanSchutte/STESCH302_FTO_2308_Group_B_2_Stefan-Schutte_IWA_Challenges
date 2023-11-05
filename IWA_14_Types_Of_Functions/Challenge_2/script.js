@@ -14,6 +14,16 @@ function internal() {
 
     return this;
 }
+
+/*
+function internal() {
+    const added = this.add(this.internal.a, this.internal.b);
+    const multiplied = this.multiply(this.internal.a, this.internal.b);
+    console.log(added * multiplied);
+    return this;
+}
+*/
+
 // Not allowed to change below this
 
 const example1 = {
