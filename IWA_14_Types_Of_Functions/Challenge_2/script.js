@@ -3,7 +3,7 @@ const add = (a, b) => a + b;
 const multiply = (a, b) => a * b;
 
 function internal() {
-    const added = this.add(this.internal.a, this.internal.b);
+    const added = add(this.internal.a, this.internal.b);
     console.log(added * this.internal.c);
 
     //console.log(added);
@@ -17,9 +17,9 @@ function internal() {
 
 /*
 function internal() {
-    const added = this.add(this.internal.a, this.internal.b);
-    const multiplied = this.multiply(this.internal.a, this.internal.b);
-    console.log(added * multiplied);
+    const added = add(this.internal.a, this.internal.b);
+    const multiplied = multiply(this.internal.a, this.internal.b);
+    console.log(added * multiplied );
     return this;
 }
 */

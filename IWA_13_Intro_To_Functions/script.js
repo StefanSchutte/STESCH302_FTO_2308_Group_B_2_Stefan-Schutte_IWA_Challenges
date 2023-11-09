@@ -12,7 +12,7 @@ const logCalc = () => {
 }
 
 const calcUser = () => {
-    logCalc(calculated)
+    logCalc()//argument
     if (calculated > 2) user = 'John'
     if (calculated > 2) state = 'requesting'
     if (calculated > 3) state = 'idle'

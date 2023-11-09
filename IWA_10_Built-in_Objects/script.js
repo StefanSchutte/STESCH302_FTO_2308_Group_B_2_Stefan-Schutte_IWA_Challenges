@@ -54,13 +54,13 @@ const futureId = 9
 // Do not change code above this comment
 
 if (holidays[futureId]) {
-    console.log(holidays[futureId].name) }
+    console.log(holidays[futureId]?.name) }
 else{console.log(`ID ${futureId} not created yet`)}
 
 
-let copied = { ...holidays[christmas]}
+let copied = { ...holidays[christmas],name: 'X-mas Day' }
 //console.log(copied);
-copied.name = 'X-mas Day'
+//copied.name = 'X-mas Day'
 //
 
 //
