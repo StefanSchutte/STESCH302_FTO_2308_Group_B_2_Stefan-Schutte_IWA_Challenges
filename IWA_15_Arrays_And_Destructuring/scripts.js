@@ -11,7 +11,6 @@ function extractBiggest() {
     let maxValue = -Infinity;
     let maxIndex = -1;
 
-    // Destructure each sublist and its array, checking the last value
     data.lists.forEach(([ , numbers], index) => {
         const lastValue = numbers[numbers.length - 1] ?? -Infinity;
         if (lastValue > maxValue) {
@@ -20,17 +19,15 @@ function extractBiggest() {
         }
     });
 
-    // Destructure the sublist to get the array and pop the last value
     if (maxIndex !== -1) {
         const [ , numbers] = data.lists[maxIndex];
         return numbers.pop();
     }
 }
 
-// Use the result array to push values into it.
 for (let i = 0; i < 15; i++) {
     const biggest = extractBiggest();
-    if (biggest !== undefined) { // Ensure that undefined isn't pushed into result
+    if (biggest !== undefined) {
         result.push(biggest);
     }
 }
