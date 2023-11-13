@@ -1,3 +1,6 @@
+import {html, updateDraggingHtml} from "./view";
+import {updateDragging} from "./data";
+
 /**
  * A handler that fires when a user drags over any element inside a column. In
  * order to determine which column the user is dragging over the entire event
@@ -28,10 +31,16 @@ const handleDragOver = (event) => {
 }
 
 
-const handleDragStart = (event) => {}
+const handleDragStart = (event) => {
+    const draggedItemId = event.target.dataset.id; // Assuming each draggable item has a unique ID
+    event.dataTransfer.setData('text/plain', draggedItemId);
+}
 const handleDragEnd = (event) => {}
-const handleHelpToggle = (event) => {}
-const handleAddToggle = (event) => {}
+const handleHelpToggle = (event) => {
+}
+const handleAddToggle = (event) => {
+
+}
 const handleAddSubmit = (event) => {}
 const handleEditToggle = (event) => {}
 const handleEditSubmit = (event) => {}

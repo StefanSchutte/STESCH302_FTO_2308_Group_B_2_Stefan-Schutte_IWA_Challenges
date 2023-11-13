@@ -18,13 +18,11 @@ const getDaysInMonth = (date) => new Date(date.getFullYear(), date.getMonth() + 
 // Only edit below
 
 const createArray = (length) => {
-    //const result = []
     return Array.from({ length }, (_, index) => index);
 
     for (let i = 0; i < length; i++) {
         result.push(i)
     }
-
     return result
 }
 
@@ -35,18 +33,18 @@ const createData = () => {
     const startDay = current.getDay()
     const daysInMonth = getDaysInMonth(current)
 
-    const weeks = createArray(5)
+    const weeks = Math.ceil((startDay + daysInMonth) / 7)
     const days = 7
     const result = []
 
-    for (const weekIndex of weeks) {
+    for (let weekIndex = 0; weekIndex < weeks; weekIndex++) {
     result.push({
         week: weekIndex + 1,
         days: []
     })
 
     for (let dayIndex = 0; dayIndex < days; dayIndex++) {
-        const day = weekIndex + dayIndex - startDay + 1;
+        const day = weekIndex * days + dayIndex - startDay + 1;
         const isValid = day > 0 && day <= daysInMonth
 
         result[weekIndex].days.push({
@@ -55,7 +53,6 @@ const createData = () => {
         })
     }
 }
-
 return result;
 };
 
@@ -67,7 +64,6 @@ const addCell = (existing, classString, value) => {
             ${value}
         </td>
     `
-
     return result
 }
 
@@ -88,7 +84,7 @@ const createHtml = (data) => {
             if (isToday) classString = `${classString} table__cell_today`
             if (isWeekend) classString = `${classString} table__cell_weekend`
             if (isAlternate) classString = `${classString} table__cell_alternate`
-            inner = addCell()
+            inner = addCell(inner, classString, value)
         }
 
         result = `
@@ -96,7 +92,6 @@ const createHtml = (data) => {
             <tr>${inner}</tr>
         `
     }
-
     return result
 }
 
