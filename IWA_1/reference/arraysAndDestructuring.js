@@ -67,7 +67,7 @@ const board = [
 ]
 
 const array3 = [5, 'hello', {id: '103', name: 'John', surname: 'Smit', game: {
-    status: 'not-finished', board: [null, 'x', null]['x', null, 'o'] ['x', null, 'o']
+    status: 'not-finished', board: [[null, 'x', null],['x', null, 'o'], ['x', null, 'o']]
     }}]
 
 //create objects from nested arrays
