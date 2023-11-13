@@ -25,14 +25,6 @@ function extractBiggest() {
     }
 }
 
-for (let i = 0; i < 15; i++) {
-    const biggest = extractBiggest();
-    if (biggest !== undefined) {
-        result.push(biggest);
-    }
-}
-
-
 // Only edit above
 
 result.push(extractBiggest())
