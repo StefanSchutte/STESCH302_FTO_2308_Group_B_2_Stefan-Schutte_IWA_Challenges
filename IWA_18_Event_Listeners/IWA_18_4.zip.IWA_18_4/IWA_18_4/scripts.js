@@ -1,5 +1,8 @@
-import {html, updateDraggingHtml} from "./view";
-import {updateDragging} from "./data";
+import {html, updateDraggingHtml} from "./view.js";
+import {updateDragging} from "./data.js";
+//const { html, updateDraggingHtml } = require('./view');
+//const { updateDragging } = require('./data');
+console.log('hi')
 
 /**
  * A handler that fires when a user drags over any element inside a column. In
@@ -28,19 +31,15 @@ const handleDragOver = (event) => {
     if (!column) return
     updateDragging({ over: column })
     updateDraggingHtml({ over: column })
+
 }
 
 
 const handleDragStart = (event) => {
-    const draggedItemId = event.target.dataset.id; // Assuming each draggable item has a unique ID
-    event.dataTransfer.setData('text/plain', draggedItemId);
 }
 const handleDragEnd = (event) => {}
-const handleHelpToggle = (event) => {
-}
-const handleAddToggle = (event) => {
-
-}
+const handleHelpToggle = (event) => {}
+const handleAddToggle = (event) => {}
 const handleAddSubmit = (event) => {}
 const handleEditToggle = (event) => {}
 const handleEditSubmit = (event) => {}
@@ -66,3 +65,5 @@ for (const htmlColumn of Object.values(html.columns)) {
 for (const htmlArea of Object.values(html.area)) {
     htmlArea.addEventListener('dragover', handleDragOver)
 }
+
+console.log('hi')

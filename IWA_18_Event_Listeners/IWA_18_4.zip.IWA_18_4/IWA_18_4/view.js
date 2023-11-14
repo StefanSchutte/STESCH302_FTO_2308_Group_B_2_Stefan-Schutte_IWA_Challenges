@@ -1,5 +1,6 @@
 import { TABLES, COLUMNS, state } from './data.js'
 
+//const { TABLES, COLUMNS, state } = require('./data.js');
 /**
  * Takes any order as an object literal (as saved in state) and converts it a
  * HTML element that can be appended to the DOM. Creating order elements

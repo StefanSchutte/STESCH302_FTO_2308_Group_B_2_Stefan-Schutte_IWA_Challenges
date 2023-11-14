@@ -4,6 +4,7 @@ const multiply = (a, b) => a * b;
 
 function internal() {
     const added = add(this.internal.a, this.internal.b);
+
     console.log(added * this.internal.c);
 
     //console.log(added);
