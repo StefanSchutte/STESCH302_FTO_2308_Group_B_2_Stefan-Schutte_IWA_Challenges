@@ -4,6 +4,14 @@ import { TABLES, COLUMNS, state} from "./data.js";
 //const { html, updateDraggingHtml } = require('./view');
 //const { updateDragging } = require('./data');
 
+document.addEventListener('DOMContentLoaded', function () {
+    // Focus the "Add Order" button
+    const addOrderButton = document.getElementById('addOrderButton');
+
+    if (addOrderButton) {
+        addOrderButton.focus();
+    }
+});
 
 /**
  * A handler that fires when a user drags over any element inside a column. In
@@ -54,6 +62,7 @@ for (const htmlColumn of Object.values(html.columns)) {
     htmlColumn.addEventListener('dragstart', handleDragStart);
 }
 const handleDragEnd = (event) => {
+    event.preventDefault();
     // Reset the dragging state in the UI
     updateDraggingHtml({ over: null });
 
@@ -61,9 +70,15 @@ const handleDragEnd = (event) => {
     updateDragging({ over: null });
 };
 
+const handleDrop = (event) => {
+    event.preventDefault();
+    const orderId = event.dataTransfer.getData('text/plain');
+    const newColumn = event.target.dataset.area; // Assuming you have a dataset for the target area
+    moveToColumn(orderId, newColumn);
+}
 // Attach the handleDragEnd function to relevant drag events
-for (const htmlColumn of Object.values(html.columns)) {
-    htmlColumn.addEventListener('dragend', handleDragEnd);
+for (const htmlArea of Object.values(html.area)) {
+    htmlArea.addEventListener('drop', handleDrop);
 }
 //
 const handleHelpToggle = (event) => {
@@ -72,6 +87,7 @@ const handleHelpToggle = (event) => {
     if (helpOverlay.hasAttribute('open')) {
         // If the help overlay is currently open, close it
         helpOverlay.removeAttribute('open');
+        html.other.add.focus();
     } else {
         // If the help overlay is closed, open it
         helpOverlay.setAttribute('open', '');
@@ -115,6 +131,8 @@ const handleAddToggle = (event) => {
     if (addOverlay.hasAttribute('open')) {
         // If the Add Order overlay is currently open, close it
         addOverlay.removeAttribute('open');
+        html.other.add.focus();
+
     } else {
         // If the Add Order overlay is closed, open it
         addOverlay.setAttribute('open', '');
@@ -129,21 +147,25 @@ const handleAddToggle = (event) => {
     }
 }
 //
+
+
+
 const handleEditToggle = (event) => {
     const editOverlay = html.edit.overlay;
+    const backdrop = document.querySelector('.backdrop');
 
-    // Toggle the "open" attribute to show/hide the overlay
     if (editOverlay.hasAttribute('open')) {
+        // If the Edit Order overlay is currently open, close it
         editOverlay.removeAttribute('open');
+        html.other.add.focus();
+        backdrop.style.display = 'none';
     } else {
-        editOverlay.setAttribute('open', true);
+        // If the Edit Order overlay is closed, open it
+        editOverlay.setAttribute('open', '');
+        backdrop.style.display = 'block';
     }
+};
 
-    // Clear the edit form when opening the overlay
-    if (editOverlay.hasAttribute('open')) {
-        clearEditForm();
-    }
-}
 const handleEditSubmit = (event) => {
     event.preventDefault();
 

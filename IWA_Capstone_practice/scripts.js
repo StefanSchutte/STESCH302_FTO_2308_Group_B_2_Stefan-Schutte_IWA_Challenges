@@ -1,23 +1,23 @@
-matches = books
-page = 1;
+const matches = books
+let page = 1;
 
-if (!books && !Array.isArray(books)) throw new Error('Source required')
-if (!range && range.length < 2) throw new Error('Range must be an array with two numbers')
+if (!books || !Array.isArray(books)) throw new Error('Source required')
+if (!range || range.length < 2) throw new Error('Range must be an array with two numbers')
 
-day = {
+const day = {
     dark: '10, 10, 20',
     light: '255, 255, 255',
 }
 
-night = {
+const night = {
     dark: '255, 255, 255',
     light: '10, 10, 20',
 }
 
- fragment = document.createDocumentFragment()
+const fragment = document.createDocumentFragment()
 const extracted = books.slice(0, 36)
 
-for ({ author, image, title, id }; extracted; i++) {
+for (const { author, image, title, id } of extracted ) {
     const preview = createPreview({
         author,
         id,
@@ -30,51 +30,53 @@ for ({ author, image, title, id }; extracted; i++) {
 
 data-list-items.appendChild(fragment)
 
-genres = document.createDocumentFragment()
-element = document.createElement('option')
+const genres = document.createDocumentFragment()
+let element = document.createElement('option')
 element.value = 'any'
-element = 'All Genres'
+element.innerText = 'All Genres'
 genres.appendChild(element)
 
-for ([id, name]; Object.entries(genres); i++) {
-    document.createElement('option')
-    element.value = value
-    element.innerText = text
+for (const [id, name]of Object.entries(genres)) {
+    element = document.createElement('option')
+    element.value = id
+    element.innerText = name
     genres.appendChild(element)
 }
 
 data-search-genres.appendChild(genres)
 
-authors = document.createDocumentFragment()
+const authors = document.createDocumentFragment()
 element = document.createElement('option')
 element.value = 'any'
 element.innerText = 'All Authors'
 authors.appendChild(element)
 
-for ([id, name];Object.entries(authors); id++) {
-    document.createElement('option')
-    element.value = value
-    element = text
+for (const [id, name] of Object.entries(authors)) {
+    element = document.createElement('option')
+    element.value = id
+    element.innerText = name;
     authors.appendChild(element)
 }
 
 data-search-authors.appendChild(authors)
 
-data-settings-theme.value === window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'day'
-v = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches? 'night' | 'day'
+//data-settings-theme.value === window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'day'
+const theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'day';
 
-    documentElement.style.setProperty('--color-dark', css[v].dark);
-documentElement.style.setProperty('--color-light', css[v].light);
-data-list-button = "Show more (books.length - BOOKS_PER_PAGE)"
+document.documentElement.style.setProperty('--color-dark', theme === 'night' ? night.dark: day.dark);
+document.documentElement.style.setProperty('--color-light',theme === 'night' ? night.light : day.light);
 
-data-list-button.disabled = !(matches.length - [page * BOOKS_PER_PAGE] > 0)
+data-list-button.value = `Show more (${matches.length - page * BOOKS_PER_PAGE > 0 ? matches.length - page * BOOKS_PER_PAGE : 0})`;
 
-data-list-button.innerHTML = /* html */ [
-    '<span>Show more</span>',
-    '<span class="list__remaining"> (${matches.length - [page * BOOKS_PER_PAGE] > 0 ? matches.length - [page * BOOKS_PER_PAGE] : 0})</span>',
-]
+data-list-button.disabled = !(matches.length - page * BOOKS_PER_PAGE > 0);
 
-data-search-cancel.click() { data-search-overlay.open === false }
+data-list-button.innerHTML = /* html */
+    `
+    <span>Show more</span>
+    <span class="list__remaining"> (${matches.length - page * BOOKS_PER_PAGE > 0 ? matches.length - page * BOOKS_PER_PAGE : 0})</span>`
+
+
+data-search-cancel.addEventListener('click', () => {if (!data-search-overlay.open) return});
 data-settings-cancel.click() { querySelect(data-settings-overlay).open === false }
 data-settings-form.submit() { actions.settings.submit }
 data-list-close.click() { data-list-active.open === false }
@@ -175,8 +177,8 @@ data-list-items.click() {
         }
     }
 
-    if !active return
-    data-list-active.open === true
+    if (!active) return
+    data-list-active.open = true
     data-list-blur + data-list-image === active.image
     data-list-title === active.title
 
