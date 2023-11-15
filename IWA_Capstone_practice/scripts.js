@@ -14,7 +14,7 @@ night = {
     light: '10, 10, 20',
 }
 
-fragment = document.createDocumentFragment()
+ fragment = document.createDocumentFragment()
 const extracted = books.slice(0, 36)
 
 for ({ author, image, title, id }; extracted; i++) {

@@ -1,8 +1,9 @@
-import {html, updateDraggingHtml} from "./view.js";
-import {updateDragging} from "./data.js";
+import {createOrderHtml, html, moveToColumn, updateDraggingHtml} from "./view.js";
+import {createOrderData, updateDragging} from "./data.js";
+import { TABLES, COLUMNS, state} from "./data.js";
 //const { html, updateDraggingHtml } = require('./view');
 //const { updateDragging } = require('./data');
-console.log('hi')
+
 
 /**
  * A handler that fires when a user drags over any element inside a column. In
@@ -36,14 +37,153 @@ const handleDragOver = (event) => {
 
 
 const handleDragStart = (event) => {
+    const orderId = event.target.dataset.id;
+
+    // Set the data to be transferred during the drag operation
+    event.dataTransfer.setData('text/plain', orderId);
+
+    // Update the dragging state in the UI to highlight the current column
+    updateDraggingHtml({ over: event.target.dataset.column });
+
+    // Update the dragging state in the app state
+    updateDragging({ source: orderId });
+};
+
+// Attach the handleDragStart function to relevant drag events
+for (const htmlColumn of Object.values(html.columns)) {
+    htmlColumn.addEventListener('dragstart', handleDragStart);
 }
-const handleDragEnd = (event) => {}
-const handleHelpToggle = (event) => {}
-const handleAddToggle = (event) => {}
-const handleAddSubmit = (event) => {}
-const handleEditToggle = (event) => {}
-const handleEditSubmit = (event) => {}
-const handleDelete = (event) => {}
+const handleDragEnd = (event) => {
+    // Reset the dragging state in the UI
+    updateDraggingHtml({ over: null });
+
+    // Reset the dragging state in the app state
+    updateDragging({ over: null });
+};
+
+// Attach the handleDragEnd function to relevant drag events
+for (const htmlColumn of Object.values(html.columns)) {
+    htmlColumn.addEventListener('dragend', handleDragEnd);
+}
+//
+const handleHelpToggle = (event) => {
+    const helpOverlay = html.help.overlay;
+
+    if (helpOverlay.hasAttribute('open')) {
+        // If the help overlay is currently open, close it
+        helpOverlay.removeAttribute('open');
+    } else {
+        // If the help overlay is closed, open it
+        helpOverlay.setAttribute('open', '');
+    }
+
+    // You might also want to add logic to handle the backdrop visibility
+    const backdrop = document.querySelector('.backdrop');
+    if (helpOverlay.hasAttribute('open')) {
+        backdrop.style.display = 'block';
+    } else {
+        backdrop.style.display = 'none';
+    }
+}
+//
+
+const handleAddSubmit = (event) => {
+    event.preventDefault();
+
+    // Retrieve values from the add form
+    const title = html.add.title.value;
+    const table = html.add.table.value;
+    const column = 'ordered'; // Default column for a new order
+
+    // Create a new order
+    const newOrder = createOrderData({ title, table, column });
+
+    // Update the state with the new order
+    state.orders[newOrder.id] = newOrder;
+
+    // Append the new order to the "ordered" column in the DOM
+    html.columns.ordered.appendChild(createOrderHtml(newOrder));
+
+    // Close the add overlay
+    handleAddToggle();
+};
+
+//
+const handleAddToggle = (event) => {
+    const addOverlay = html.add.overlay;
+
+    if (addOverlay.hasAttribute('open')) {
+        // If the Add Order overlay is currently open, close it
+        addOverlay.removeAttribute('open');
+    } else {
+        // If the Add Order overlay is closed, open it
+        addOverlay.setAttribute('open', '');
+    }
+
+    // You might also want to add logic to handle the backdrop visibility
+    const backdrop = document.querySelector('.backdrop');
+    if (addOverlay.hasAttribute('open')) {
+        backdrop.style.display = 'block';
+    } else {
+        backdrop.style.display = 'none';
+    }
+}
+//
+const handleEditToggle = (event) => {
+    const editOverlay = html.edit.overlay;
+
+    // Toggle the "open" attribute to show/hide the overlay
+    if (editOverlay.hasAttribute('open')) {
+        editOverlay.removeAttribute('open');
+    } else {
+        editOverlay.setAttribute('open', true);
+    }
+
+    // Clear the edit form when opening the overlay
+    if (editOverlay.hasAttribute('open')) {
+        clearEditForm();
+    }
+}
+const handleEditSubmit = (event) => {
+    event.preventDefault();
+
+    // Retrieve values from the edit form
+    const id = html.edit.id.value;
+    const title = html.edit.title.value;
+    const table = html.edit.table.value;
+    const column = html.edit.column.value;
+
+    // Check if the order with the given ID exists in the state
+    if (state.orders[id]) {
+        // Update the order with the new values
+        state.orders[id].title = title;
+        state.orders[id].table = table;
+        state.orders[id].column = column;
+
+        // Update the corresponding order in the DOM
+        const orderElement = document.querySelector(`[data-id="${id}"]`);
+        orderElement.querySelector('[data-order-title]').textContent = title;
+        orderElement.querySelector('[data-order-table]').textContent = table;
+    }
+
+    // Close the edit overlay
+    handleEditToggle();
+}
+const handleDelete = (event) => {
+    const orderIdToDelete = html.edit.id.dataset.editId; // Retrieve the order ID from the HTML attribute
+
+    // Remove the order from the state
+    delete state.orders[orderIdToDelete];
+
+    // Remove the order from the DOM
+    const htmlOrderToDelete = document.querySelector(`[data-id="${orderIdToDelete}"]`);
+    if (htmlOrderToDelete) {
+        htmlOrderToDelete.remove();
+    }
+
+    // Close the edit overlay
+    handleEditToggle();
+}
 
 html.add.cancel.addEventListener('click', handleAddToggle)
 html.other.add.addEventListener('click', handleAddToggle)
@@ -66,4 +206,3 @@ for (const htmlArea of Object.values(html.area)) {
     htmlArea.addEventListener('dragover', handleDragOver)
 }
 
-console.log('hi')
