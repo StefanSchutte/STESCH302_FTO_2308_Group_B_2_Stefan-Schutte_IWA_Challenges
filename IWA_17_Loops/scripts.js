@@ -17,15 +17,6 @@ const getDaysInMonth = (date) => new Date(date.getFullYear(), date.getMonth() + 
 
 // Only edit below
 
-const createArray = (length) => {
-    return Array.from({ length }, (_, index) => index);
-
-    for (let i = 0; i < length; i++) {
-        result.push(i)
-    }
-    return result
-}
-
 const createData = () => {
     const current = new Date()
     current.setDate(1)

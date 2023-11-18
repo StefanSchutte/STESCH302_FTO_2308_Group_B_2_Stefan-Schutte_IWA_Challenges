@@ -68,7 +68,7 @@ const data = {
 const createHtml = (athlete) => {
     const {firstName, surname, id, races } = athlete
     const [latestRace]= races.reverse()
-        const {date, time} = latestRace
+    const {date, time} = latestRace
 
     const fragment = document.createDocumentFragment();
 
