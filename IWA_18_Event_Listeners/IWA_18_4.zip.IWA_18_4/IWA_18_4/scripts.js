@@ -201,14 +201,12 @@ const handleEditSubmit = (event) => {
             moveToColumn(id, column);
         }
     }
-
-    // Close the edit overlay
     handleEditToggle();
 }
 
 
 const handleDelete = (event) => {
-    const orderIdToDelete = html.edit.id.dataset.editId; // Retrieve the order ID from the HTML attribute
+    const orderIdToDelete = html.edit.id.value; // Retrieve the order ID from the HTML attribute
 
     // Remove the order from the state
     delete state.orders[orderIdToDelete];
