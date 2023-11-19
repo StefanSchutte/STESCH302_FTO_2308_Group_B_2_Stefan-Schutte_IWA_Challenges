@@ -1,11 +1,9 @@
 import {createOrderHtml, html, moveToColumn, updateDraggingHtml} from "./view.js";
 import {createOrderData, updateDragging} from "./data.js";
 import { TABLES, COLUMNS, state} from "./data.js";
-//const { html, updateDraggingHtml } = require('./view');
-//const { updateDragging } = require('./data');
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Focus the "Add Order" button
+
     const addOrderButton = document.getElementById('addOrderButton');
 
     if (addOrderButton) {
@@ -42,45 +40,46 @@ const handleDragOver = (event) => {
     updateDraggingHtml({ over: column })
 
 }
-
-
+/**
+ * Function that handels dragging.
+ * @param event
+ */
 const handleDragStart = (event) => {
     const orderId = event.target.dataset.id;
-
-    // Set the data to be transferred during the drag operation
     event.dataTransfer.setData('text/plain', orderId);
-
-    // Update the dragging state in the UI to highlight the current column
     updateDraggingHtml({ over: event.target.dataset.column });
-
-    // Update the dragging state in the app state
     updateDragging({ source: orderId });
 };
-
-// Attach the handleDragStart function to relevant drag events
+/**
+ * Attach the handleDragStart function to relevant drag events
+ */
 for (const htmlColumn of Object.values(html.columns)) {
     htmlColumn.addEventListener('dragstart', handleDragStart);
 }
+
+/**
+ * Resets dragging in UI and app
+ * @param event
+ */
 const handleDragEnd = (event) => {
     event.preventDefault();
-    // Reset the dragging state in the UI
     updateDraggingHtml({ over: null });
-
-    // Reset the dragging state in the app state
     updateDragging({ over: null });
 };
 
 const handleDrop = (event) => {
     event.preventDefault();
     const orderId = event.dataTransfer.getData('text/plain');
-    const newColumn = event.target.dataset.area; // Assuming you have a dataset for the target area
+    const newColumn = event.target.dataset.area;
     moveToColumn(orderId, newColumn);
 }
-// Attach the handleDragEnd function to relevant drag events
+/**
+ * Attach the handleDragEnd function to relevant drag events
+ */
 for (const htmlArea of Object.values(html.area)) {
     htmlArea.addEventListener('drop', handleDrop);
 }
-//
+
 const handleHelpToggle = (event) => {
     const helpOverlay = html.help.overlay;
 
@@ -93,7 +92,7 @@ const handleHelpToggle = (event) => {
         helpOverlay.setAttribute('open', '');
     }
 
-    // You might also want to add logic to handle the backdrop visibility
+    //logic to handle the backdrop visibility
     const backdrop = document.querySelector('.backdrop');
     if (helpOverlay.hasAttribute('open')) {
         backdrop.style.display = 'block';
@@ -148,8 +147,6 @@ const handleAddToggle = (event) => {
 }
 //
 
-
-
 const handleEditToggle = (event) => {
     const editOverlay = html.edit.overlay;
     const backdrop = document.querySelector('.backdrop');
@@ -161,8 +158,19 @@ const handleEditToggle = (event) => {
         backdrop.style.display = 'none';
     } else {
         // If the Edit Order overlay is closed, open it
-        editOverlay.setAttribute('open', '');
-        backdrop.style.display = 'block';
+
+        // Obtain the order ID from the clicked element
+        const clickedOrderElement = event.target.closest('[data-id]');
+        if (clickedOrderElement) {
+            const orderId = clickedOrderElement.dataset.id;
+
+            // Set the order ID in the data-edit-id attribute
+            html.edit.id.value = orderId;
+
+            editOverlay.setAttribute('open', '');
+            backdrop.style.display = 'block';
+
+        }
     }
 };
 
@@ -180,17 +188,25 @@ const handleEditSubmit = (event) => {
         // Update the order with the new values
         state.orders[id].title = title;
         state.orders[id].table = table;
-        state.orders[id].column = column;
+        const oldColumn = state.orders[id].column;
 
         // Update the corresponding order in the DOM
         const orderElement = document.querySelector(`[data-id="${id}"]`);
         orderElement.querySelector('[data-order-title]').textContent = title;
         orderElement.querySelector('[data-order-table]').textContent = table;
+
+        // Check if the column has changed
+        if (oldColumn !== column) {
+            // Move the order to the new column
+            moveToColumn(id, column);
+        }
     }
 
     // Close the edit overlay
     handleEditToggle();
 }
+
+
 const handleDelete = (event) => {
     const orderIdToDelete = html.edit.id.dataset.editId; // Retrieve the order ID from the HTML attribute
 
