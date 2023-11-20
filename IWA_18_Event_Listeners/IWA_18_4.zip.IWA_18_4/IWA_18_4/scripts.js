@@ -80,19 +80,20 @@ for (const htmlArea of Object.values(html.area)) {
     htmlArea.addEventListener('drop', handleDrop);
 }
 
+/**
+ * If the help overlay is currently open, close it else if the help overlay is closed, open it.
+ * logic to handle the backdrop visibility
+ * @param event
+ */
 const handleHelpToggle = (event) => {
     const helpOverlay = html.help.overlay;
 
     if (helpOverlay.hasAttribute('open')) {
-        // If the help overlay is currently open, close it
         helpOverlay.removeAttribute('open');
         html.other.add.focus();
     } else {
-        // If the help overlay is closed, open it
         helpOverlay.setAttribute('open', '');
     }
-
-    //logic to handle the backdrop visibility
     const backdrop = document.querySelector('.backdrop');
     if (helpOverlay.hasAttribute('open')) {
         backdrop.style.display = 'block';
@@ -100,44 +101,42 @@ const handleHelpToggle = (event) => {
         backdrop.style.display = 'none';
     }
 }
-//
-
+/**
+ * Retrieve values from the add form.Create a new Order and update the state with the new order.
+ * Append the new order to the "ordered" column in the DOM
+ * @param event
+ */
 const handleAddSubmit = (event) => {
     event.preventDefault();
 
-    // Retrieve values from the add form
     const title = html.add.title.value;
     const table = html.add.table.value;
-    const column = 'ordered'; // Default column for a new order
+    const column = 'ordered';
 
-    // Create a new order
     const newOrder = createOrderData({ title, table, column });
 
-    // Update the state with the new order
     state.orders[newOrder.id] = newOrder;
 
-    // Append the new order to the "ordered" column in the DOM
     html.columns.ordered.appendChild(createOrderHtml(newOrder));
 
-    // Close the add overlay
     handleAddToggle();
 };
 
-//
+/**
+ * If the Add Order overlay is currently open, close it else if its closed open it.
+ * @param event
+ */
 const handleAddToggle = (event) => {
     const addOverlay = html.add.overlay;
 
     if (addOverlay.hasAttribute('open')) {
-        // If the Add Order overlay is currently open, close it
         addOverlay.removeAttribute('open');
         html.other.add.focus();
 
     } else {
-        // If the Add Order overlay is closed, open it
         addOverlay.setAttribute('open', '');
     }
 
-    // You might also want to add logic to handle the backdrop visibility
     const backdrop = document.querySelector('.backdrop');
     if (addOverlay.hasAttribute('open')) {
         backdrop.style.display = 'block';
@@ -145,79 +144,79 @@ const handleAddToggle = (event) => {
         backdrop.style.display = 'none';
     }
 }
-//
 
+/**
+ * If the Edit Order overlay is currently open, close it, else if closed open it.
+ * Obtain order ID from clicked element and set the order ID in the data-edit-id attribute
+ * @param event
+ */
 const handleEditToggle = (event) => {
     const editOverlay = html.edit.overlay;
     const backdrop = document.querySelector('.backdrop');
 
     if (editOverlay.hasAttribute('open')) {
-        // If the Edit Order overlay is currently open, close it
         editOverlay.removeAttribute('open');
         html.other.add.focus();
         backdrop.style.display = 'none';
     } else {
-        // If the Edit Order overlay is closed, open it
-
-        // Obtain the order ID from the clicked element
         const clickedOrderElement = event.target.closest('[data-id]');
         if (clickedOrderElement) {
             const orderId = clickedOrderElement.dataset.id;
 
-            // Set the order ID in the data-edit-id attribute
             html.edit.id.value = orderId;
 
             editOverlay.setAttribute('open', '');
             backdrop.style.display = 'block';
-
         }
     }
 };
 
+/**
+ * Retrieve values from the edit form.
+ * Check if the order with the given ID exists in the state and then update the order with new values.
+ * Update the corresponding order in the DOM.
+ * Check if the column has changed and move the order to the new column
+ * @param event
+ */
 const handleEditSubmit = (event) => {
     event.preventDefault();
 
-    // Retrieve values from the edit form
     const id = html.edit.id.value;
     const title = html.edit.title.value;
     const table = html.edit.table.value;
     const column = html.edit.column.value;
 
-    // Check if the order with the given ID exists in the state
     if (state.orders[id]) {
-        // Update the order with the new values
+
         state.orders[id].title = title;
         state.orders[id].table = table;
         const oldColumn = state.orders[id].column;
 
-        // Update the corresponding order in the DOM
         const orderElement = document.querySelector(`[data-id="${id}"]`);
         orderElement.querySelector('[data-order-title]').textContent = title;
         orderElement.querySelector('[data-order-table]').textContent = table;
 
-        // Check if the column has changed
         if (oldColumn !== column) {
-            // Move the order to the new column
             moveToColumn(id, column);
         }
     }
     handleEditToggle();
 }
 
-
+/**
+ * Retrieve the order ID from the HTML attribute
+ * Removing the orders from state and DOM {htmlOrderToDelete}
+ * @param event
+ */
 const handleDelete = (event) => {
-    const orderIdToDelete = html.edit.id.value; // Retrieve the order ID from the HTML attribute
+    const orderIdToDelete = html.edit.id.value;
 
-    // Remove the order from the state
     delete state.orders[orderIdToDelete];
 
-    // Remove the order from the DOM
     const htmlOrderToDelete = document.querySelector(`[data-id="${orderIdToDelete}"]`);
     if (htmlOrderToDelete) {
         htmlOrderToDelete.remove();
     }
-
-    // Close the edit overlay
     handleEditToggle();
 }
 
