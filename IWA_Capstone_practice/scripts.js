@@ -1,8 +1,7 @@
-//import { data } from "./data.js"
 import {BOOKS_PER_PAGE, books, genres, authors } from "./data.js";
 
 /**
- * My query selectors for html elements. UI parts such as buttons, overlays, search fields...
+ * My query selectors for html elements. UI parts such as buttons, overlays, search fields... Used to manipulate the DOM later in the code.
  * @type {Element}
  */
 const dataListItems = document.querySelector('[data-list-items]');
@@ -26,9 +25,19 @@ const dataSettingsTheme = document.querySelector('[data-settings-theme]');
 const dataSettingsCancel = document.querySelector('[data-settings-cancel]');
 const dataSearchCancel = document.querySelector('[data-search-cancel]');
 const dataListClose = document.querySelector('[data-list-close]');
+const dataHeaderSettings = document.querySelector('[data-header-settings]');
+const headerLogo = document.querySelector('.header__logo');
 
 /**
- * ek het geen idea
+ * Navigate back to main page
+ */
+headerLogo.addEventListener('click',()=>{
+    const mainPageUrl = 'http://localhost:63342/STESCH302_FTO_2308_Group_B_2_Stefan-Schutte_IWA_Challenges/IWA_Capstone_practice/index.html?_ijt=6br4845jkvkd5btlo38k12kb2f';
+
+    window.location.href = mainPageUrl;
+})
+/**
+ * Initializes variables, page and range, and performs error checking to ensure that the required data is available.
  * @type {[{image: string, pages: number, genres: string[], author: string, popularity: number, description: string, id: string, published: string, title: string},{image: string, pages: number, genres: string[], author: string, popularity: number, description: string, id: string, published: string, title: string},{image: string, pages: number, genres, author: string, popularity: number, description: string, id: string, published: string, title: string},{image: string, pages: number, genres, author: string, popularity: number, description: string, id: string, published: string, title: string},{image: string, pages: number, genres, author: string, popularity: number, description: string, id: string, published: string, title: string},null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]}
  */
 const matches = books
@@ -52,14 +61,20 @@ const night = {
     light: '10, 10, 20',
 }
 
-const theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'day';
+/**
+ * Function responsible for applying user settings to your application.
+ * @param userSettings
+ */
+function applyUserSettings (userSettings) {
 
-document.documentElement.style.setProperty('--color-dark', theme === 'night' ? night.dark: day.dark);
-document.documentElement.style.setProperty('--color-light',theme === 'night' ? night.light : day.light);
-
+    const theme = userSettings.theme;
+    document.documentElement.style.setProperty('--color-dark', theme === 'night' ? night.dark : day.dark);
+    document.documentElement.style.setProperty('--color-light', theme === 'night' ? night.light : day.light);
+}
 /**
  * preview - A function createPreview is defined to generate HTML elements representing book previews.
- * These previews are then appended to a document fragment.
+ * It then creates a document fragment and populates it with book previews using a loop over the first 36 books from the books array.
+ * These previews are then  appended to the fragment to the dataListItems element in the DOM.
  * @type {DocumentFragment}
  */
 function createPreview(book) {
@@ -70,23 +85,50 @@ function createPreview(book) {
     previewElement.setAttribute('data-preview', id);
 
     previewElement.innerHTML = /* html */ `
-        <img class="preview__image" src="${image}" />
+        <img class="preview__image" src="${image}" >
         <div class="preview__info">
             <h3 class="preview__title">${title}</h3>
-            <div class="preview__author">${author}</div>
-            <p class="preview__description">${description}</p>
-            <div class="preview__date">${new Date(published).toLocaleDateString()}</div>
+            <div class="preview__author">${authors[author]}</div>
         </div>
     `;
 
     return previewElement;
 }
 
+/**
+ * Actions.submit gathers user settings from the dataSettingsTheme element.
+ * It creates a userSettings object, collecting the theme.
+ * Calls the applyUserSettings function, passing the userSettings object as an argument.
+ * List.updateRemaining calculates the number of remaining items in the matches array based on the current page and the number of items per page.
+ * updates the text and disabled state of the "Show more" button (dataListButton) based on the calculated number of remaining items.
+ * The button's text is set to display the remaining items count, or 0 if there are no remaining items.
+ * The button is disabled if there are no remaining items, meaning there are no more items to show.
+ * @type {{settings: {submit: actions.settings.submit}, list: {updateRemaining: actions.list.updateRemaining}}}
+ */
+const actions = {
+    settings: {
+        submit: function () {
+            const userSettings = {
+                theme: dataSettingsTheme.value,
+            };
+            applyUserSettings(userSettings);
+        }
+    },
+    list: {
+        updateRemaining: function () {
+            const remainingItems = matches.length - page * BOOKS_PER_PAGE;
+            dataListButton.value = `Show more (${remainingItems > 0 ? remainingItems : 0})`;
+            dataListButton.disabled = !(remainingItems > 0);
+        }
+    }
+};
+
 const fragment = document.createDocumentFragment();
 const extractedPreview = books.slice(0, 36);
 
 for (const book of extractedPreview) {
     const preview = createPreview(book);
+
     fragment.appendChild(preview);
 }
 
@@ -166,13 +208,47 @@ dataListButton.innerHTML = /* html */
  * Event listeners are attached to various elements, such as the search and settings buttons, cancel buttons, and the "Show more" button.
  * These listeners handle actions like opening/closing overlays, submitting search/settings forms, and displaying more book previews.
  */
-dataSearchCancel.addEventListener('click', () => {if (!dataSearchOverlay.open) return; dataSearchOverlay.open = false});
-dataSettingsCancel.addEventListener('click', () => {if (!(dataSettingsOverlay).open) return; dataSettingsOverlay.open = false});
+dataSearchCancel.addEventListener('click', () => {
+    if (!dataSearchOverlay.open) return;
+    dataSearchOverlay.open = false
+    dataSearchTitle.value = '';
+});
+
+/**
+ * Button for settings.
+ * Checks whether overlay is currently open. If open it returns.
+ * If overlay is not open - overlay is displayed.
+ * If it's not open (!dataListClose.open evaluates to true), sets the property of dataListClose to true for closing overlay.
+ */
+dataHeaderSettings.addEventListener('click', ()=> {
+    if (dataSettingsOverlay.open) return;
+
+    dataSettingsOverlay.open = true;
+
+    if (!dataListClose.open) {
+        dataListClose.open = true;}
+});
+
+/**
+ * Checks whether the settings overlay is not open. If the overlay is not open, the function immediately returns.
+ * If the settings overlay is open, sets dataSettingsOverlay to false, indicating that the settings overlay should be closed.
+ */
+dataSettingsCancel.addEventListener('click', () => {
+    if (!(dataSettingsOverlay).open) return;
+    dataSettingsOverlay.open = false});
+
+/**
+ *  Gathering user settings from the form and applying it. Closes the settings overlay.
+ */
 dataSettingsForm.addEventListener('submit', (event) => {
     event.preventDefault();
     actions.settings.submit();
     dataSettingsOverlay.open = false;
 });
+
+/**
+ * Checks if the dataListActive element is currently open. If it is, it closes or hides the active element by setting its open property to false.
+ */
 dataListClose.addEventListener('click', () => {
     if (!dataListActive.open) return;
 
@@ -183,7 +259,18 @@ dataListButton.addEventListener('click', () => {
     const newPage = page + 1;
     const startIndex = page * BOOKS_PER_PAGE;
     const endIndex = newPage * BOOKS_PER_PAGE;
-    const previewsFragment = createPreview(matches, startIndex, endIndex);
+    //const previewsFragment = createPreview(matches, startIndex, endIndex);
+
+    // Ensure endIndex does not exceed the total number of books
+    const actualEndIndex = Math.min(endIndex, matches.length);
+
+    const previewsFragment = document.createDocumentFragment();
+
+    for (let i = startIndex; i < actualEndIndex; i++) {
+        const book = matches[i];
+        const preview = createPreview(book);
+        previewsFragment.appendChild(preview);
+    }
 
     dataListItems.appendChild(previewsFragment);
 
@@ -192,6 +279,7 @@ dataListButton.addEventListener('click', () => {
 });
 
 dataHeaderSearch.addEventListener('click', () => {
+
     if (dataSearchOverlay.open) return;
     dataSearchOverlay.open = true;
     dataSearchTitle.focus();
@@ -204,6 +292,7 @@ dataHeaderSearch.addEventListener('click', () => {
  */
 dataSearchForm.addEventListener('submit', (event) => {
     event.preventDefault();
+
     const formData = new FormData(event.target);
     const filters = Object.fromEntries(formData);
     const result = [];
@@ -218,18 +307,28 @@ dataSearchForm.addEventListener('submit', (event) => {
         }
     }
 
+    dataSearchTitle.value = '';
+    if (dataSearchOverlay.open) {
+        dataSearchOverlay.open = false;
+    }
 
-if (dataListItems.length < 1){
-    dataListMessage.add('list__message_show')
-} else {
-    dataListMessage.remove('list__message_show')
-}
+    if (dataListClose.open) {
+        dataListClose.open = false;
+    }
+
+    dataListButton.disabled = true;
+
+    if (dataListItems.length < 1) {
+        dataListMessage.add('list__message_show')
+    } else {
+        dataListMessage.remove('list__message_show')
+    }
 
     dataListItems.innerHTML = '';
 
     const extracted = result.slice(range[0], range[1]);
 
-    for (const { author, image, title, id, description, published } of extracted) {
+    for (const {author, image, title, id, description, published} of extracted) {
         const element = document.createElement('button');
         element.classList = 'preview';
         element.setAttribute('data-preview', id);
@@ -238,13 +337,11 @@ if (dataListItems.length < 1){
         <img
             class="preview__image"
             src="${image}"
-        />
-        
+        >
+
         <div class="preview__info">
             <h3 class="preview__title">${title}</h3>
             <div class="preview__author">${authors[author]}</div>
-            <p class="preview__description">${description}</p>
-            <div class="preview__date">${new Date(published).toLocaleDateString()}</div>
         </div>
     `;
 
@@ -252,29 +349,35 @@ if (dataListItems.length < 1){
     }
 
     dataListItems.appendChild(fragment);
+});
 
+/**
+ * Preview.
+ * Callback function. Uses the closest method to find the closest ancestor of the clicked element (given by event.target) that has the class preview.
+ * This is done to check if the clicked element or any of its ancestors have the preview class.
+ * If clicked element or any of its ancestors did not have the class preview, the function exits.
+ * Extracts the data-preview attribute from the clicked preview, which should correspond to the id of the book.
+ * Then, it uses Array.find to find the book in the books array that matches the extracted id.
+ * If no matching book found, return.
+ * If the book is found (active is truthy), it updates the UI with information from the clicked book.
+ * @ngdoc method
+ */
     dataListItems.addEventListener('click', (event) => {
-        const pathArray = Array.from(event.path || event.composedPath());
-        let active = null;
+        const clickedPreview = event.target.closest('.preview');
 
-        for (const node of pathArray) {
-            if (active) break;
-            const previewId = node?.dataset?.preview;
-
-            for (const singleBook of books) {
-                if (singleBook.id === previewId) active = singleBook;
-            }
+        if (!clickedPreview) {
+            return;
         }
+
+        const previewId = clickedPreview.dataset.preview;
+        const active = books.find((book) => book.id === previewId);
 
         if (!active) return;
 
         dataListActive.open = true;
         dataListBlur.src = active.image;
         dataListTitle.innerText = active.title;
-
-        // Assuming data.authors is a valid data structure
-        dataListSubtitle.innerText = `${data.authors[active.author]} (${new Date(active.published).getFullYear()})`;
+        dataListSubtitle.innerText = `${authors[active.author]} (${new Date(active.published).getFullYear()})`;
         dataListDescription.innerText = active.description;
-    });
 
 });
