@@ -41,7 +41,7 @@ headerLogo.addEventListener('click',()=>{
  * Basic error checking to ensure that the required data is available and ensures that the books variable exists and is an array.
  * Assigns books to matches, page is initialized to 1, and range is set.
  * And secondly ensures that the range variable exists and has a length of at least 2.
- * @type {[{image: string, pages: number, genres: string[], author: string, popularity: number, description: string, id: string, published: string, title: string},{image: string, pages: number, genres: string[], author: string, popularity: number, description: string, id: string, published: string, title: string},{image: string, pages: number, genres, author: string, popularity: number, description: string, id: string, published: string, title: string},{image: string, pages: number, genres, author: string, popularity: number, description: string, id: string, published: string, title: string},{image: string, pages: number, genres, author: string, popularity: number, description: string, id: string, published: string, title: string},null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]}
+ * @type {[{image: string, pages: number, genres: string[], author: string, popularity: number, description: string, id: string, published: string, title: string}
  */
 const matches = books
 let page = 1;
@@ -238,7 +238,6 @@ Object.entries(authors).forEach(([id, name]) => {
 
 dataSearchAuthors.appendChild(authorsFragment);
 
-
 /**
  * The "Show more" button is configured based on the number of remaining items to display.
  * When clicked, it adds more book previews to the list.
@@ -257,9 +256,8 @@ dataListButton.innerHTML = /* html */
     <span>Show more</span>
     <span class="list__remaining"> (${matches.length - page * BOOKS_PER_PAGE > 0 ? matches.length - page * BOOKS_PER_PAGE : 0})</span>`
 
-
-  //Event listeners are attached to various elements, such as the search and settings buttons, cancel buttons, and the "Show more" button.
-  //These listeners handle actions like opening/closing overlays, submitting search/settings forms, and displaying more book previews.
+//Event listeners are attached to various elements, such as the search and settings buttons, cancel buttons, and the "Show more" button.
+//These listeners handle actions like opening/closing overlays, submitting search/settings forms, and displaying more book previews.
 
 /**
  * When the 'dataSearchCancel' element is clicked, check if 'open' property of 'dataSearchOverlay is falsy. If not, returns.
@@ -377,7 +375,7 @@ dataSearchForm.addEventListener('submit', (event) => {
     const filters = Object.fromEntries(formData);
     const result = [];
 
-    for (const book of matches) {
+        for (const book of matches) {
         const titleMatch = filters.title.trim() === '' || book.title.toLowerCase().includes(filters.title.toLowerCase());
         const authorMatch = filters.author === 'any' || book.author === filters.author;
         const genreMatch = filters.genre === 'any' || book.genres.includes(filters.genre);
@@ -406,7 +404,7 @@ dataSearchForm.addEventListener('submit', (event) => {
 
     dataListItems.innerHTML = '';
 
-    const startIndex = 0; // Start from the beginning when displaying search results
+    const startIndex = 0;
     const endIndex = Math.min(result.length, startIndex + BOOKS_PER_PAGE);
 
     const previewsFragment = document.createDocumentFragment();
@@ -419,12 +417,10 @@ dataSearchForm.addEventListener('submit', (event) => {
     dataListItems.scrollTop = 0;
     dataListItems.appendChild(previewsFragment);
 
-    // Update the "Show more" button based on the remaining items
     const remainingItems = result.length - endIndex;
     dataListButton.value = `Show more (${remainingItems > 0 ? remainingItems : 0})`;
     dataListButton.disabled = !(remainingItems > 0);
 
-    // Store the search results in a variable for future reference
     dataListItems.searchResults = result;
 
 });
