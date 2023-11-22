@@ -62,9 +62,17 @@ for (const htmlColumn of Object.values(html.columns)) {
  * @param event
  */
 const handleDragEnd = (event) => {
-    event.preventDefault();
+    //console.log(state.dragging);
     updateDraggingHtml({ over: null });
     updateDragging({ over: null });
+    event.preventDefault();
+    const id = event.target.dataset.id;
+    const over = state.dragging;
+    console.log(over);
+
+    moveToColumn(id, over)
+
+
 };
 
 const handleDrop = (event) => {
