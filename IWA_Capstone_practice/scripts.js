@@ -1,5 +1,6 @@
 import {BOOKS_PER_PAGE, books, genres, authors } from "./data.js";
-//import {applyUserSettings, day, night, defaultTheme} from "./theme.js";
+import {applyUserSettings} from "./theme.js";
+import {createAndAppendElement, genresFragment, authorsFragment} from "./helpers.js";
 
 /**
  * My query selectors for html elements. UI parts such as buttons, overlays, search fields... Used to manipulate the DOM later in the code.
@@ -7,8 +8,8 @@ import {BOOKS_PER_PAGE, books, genres, authors } from "./data.js";
  */
 const dataListItems = document.querySelector('[data-list-items]');
 const dataListButton = document.querySelector('[data-list-button]');
-const dataSearchGenres = document.querySelector('[data-search-genres]');
-const dataSearchAuthors = document.querySelector('[data-search-authors]');
+// const dataSearchGenres = document.querySelector('[data-search-genres]');
+// const dataSearchAuthors = document.querySelector('[data-search-authors]');
 const dataListMessage = document.querySelector('[data-list-message]');
 const dataListImage = document.querySelector('[data-list-image]');
 const dataListActive = document.querySelector('[data-list-active]');
@@ -48,37 +49,6 @@ let page = 1;
 const range = [0, 10];
 if (!books || !Array.isArray(books)) throw new Error('Source required')
 if (!range || range.length < 2) throw new Error('Range must be an array with two numbers')
-
-/**
- * Sets up themes for light and dark modes based on the user's system preference (prefers-color-scheme).
- * The chosen theme is then applied to the document's root element.
- * @type {{light: string, dark: string}}
- */
-const day = {
-    dark: '10, 10, 20',
-    light: '255, 255, 255',
-}
-
-const night = {
-    dark: '255, 255, 255',
-    light: '10, 10, 20',
-}
-
-/**
- * Function responsible for applying user settings to your application.
- * Theme property is extracted from userSettings object, then css variables are set on documents root element.
- * @param userSettings
- */
-function applyUserSettings (userSettings) {
-
-    const theme = userSettings.theme;
-    document.documentElement.style.setProperty('--color-dark', theme === 'night' ? night.dark : day.dark);
-    document.documentElement.style.setProperty('--color-light', theme === 'night' ? night.light : day.light);
-}
-
-// Set the default theme to 'day'.
-const defaultTheme = 'day';
-applyUserSettings({ theme: defaultTheme });
 
 //functions
 
@@ -163,80 +133,6 @@ for (const book of extractedPreview) {
     fragment.appendChild(preview);
 }
 dataListItems.appendChild(fragment);
-
-/**
- * Creates an HTML element, sets its attributes and text content, appends child elements,
- * and appends the created element to a specified parent.
- * Create a new HTML element of the specified type. Iterates over the key-value pairs in the attributes object and sets each attribute on the created element.
- * Sets the text content of the element if the text parameter is provided.
- * Checks if both 'data' and 'callback' are provided. If true, it iterates over each item in the 'data' array and calls the provided callback function with each item.
- * The resulting child elements are then appended to the main element.
- * Appends the created element to the specified parent element if a parent is provided and then returns created HTML element.
- * @param {string} type - The type of the DOM element to create
- * @param {Object} attributes - An object containing key-value pairs for attributes
- * @param {string} text - Optional text content for the element
- * @param {DocumentFragment} parent - Parent element to append the new element to
- * @param {Array} data - Optional array of data for iteration
- * @param {Function} callback - Optional callback function for each data item
- */
-function createAndAppendElement(type, attributes, text = '', parent, data = [], callback = null) {
-    const element = document.createElement(type);
-    for (const [key, value] of Object.entries(attributes)) {
-        element[key] = value;
-    }
-    if (text) element.innerText = text;
-
-    if (data.length && callback) {
-        data.forEach(item => {
-            const childElement = callback(item);
-            element.appendChild(childElement);
-        });
-    }
-
-    if (parent) parent.appendChild(element);
-    return element;
-}
-
-/**
- * Dropdowns for genres are populated dynamically using a loop over the respective data structures (genres and authors).
- * Creates document fragment to hold genre options.
- * Uses the 'createAndAppendElement' function to create an 'option' element with the value 'any', displaying the text 'All Genres'.
- * This 'option' represents the choice to select 'all genres'. The option element is appended to the 'genresFragment'.
- * Iterates over the entries of the 'genres' object.
- * For each genre, it creates an 'option' element with the genre's ID as the value and the genre name as the text content.
- * Each 'option' element is appended to the 'genresFragment'.
- * Appends the populated 'genresFragment' to the element with the id 'dataSearchGenres' in the DOM.
- * @type {DocumentFragment}
- * param {String}
- */
-const genresFragment = document.createDocumentFragment();
-createAndAppendElement('option', { value: 'any' }, 'All Genres', genresFragment);
-
-Object.entries(genres).forEach(([id, name]) => {
-    createAndAppendElement('option', { value: id }, name, genresFragment);
-});
-
-dataSearchGenres.appendChild(genresFragment);
-
-/**
- * Dropdowns for authors are populated dynamically using a loop over the respective data structures (genres and authors).
- * Creates a document fragment for holding multiple DOM elements.
- * Uses the 'createAndAppendElement' function to create an 'option' element with the value 'any', displaying the text 'All Authors'.
- * This 'option' represents the choice to select 'all authors'. The 'option' element is appended to the 'authorsFragment'.
- * Iterates over the entries of the authors object (presumably an object mapping author IDs to author names).
- * For each author, it creates an 'option' element with the author's ID as the value and the author name as the text content.
- * Each 'option' element is appended to the 'authorsFragment'.
- * Appends the populated 'authorsFragment' to the element with the id 'dataSearchAuthors' in the DOM.
- * @type {DocumentFragment}
- */
-const authorsFragment = document.createDocumentFragment();
-createAndAppendElement('option', { value: 'any' }, 'All Authors', authorsFragment);
-
-Object.entries(authors).forEach(([id, name]) => {
-    createAndAppendElement('option', { value: id }, name, authorsFragment);
-});
-
-dataSearchAuthors.appendChild(authorsFragment);
 
 /**
  * The "Show more" button is configured based on the number of remaining items to display.
