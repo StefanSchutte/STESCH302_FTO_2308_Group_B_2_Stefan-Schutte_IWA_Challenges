@@ -5,7 +5,7 @@ const dataSearchAuthors = document.querySelector('[data-search-authors]');
 
 /**
  * Creates an HTML element, sets its attributes and text content, appends child elements,
- * and appends the created element to a specified parent.
+ * and appends the created element to parent.
  * Create a new HTML element of the specified type. Iterates over the key-value pairs in the attributes object and sets each attribute on the created element.
  * Sets the text content of the element if the text parameter is provided.
  * Checks if both 'data' and 'callback' are provided. If true, it iterates over each item in the 'data' array and calls the provided callback function with each item.

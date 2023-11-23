@@ -1,6 +1,5 @@
 import {BOOKS_PER_PAGE, books, genres, authors } from "./data.js";
 import {applyUserSettings} from "./theme.js";
-import {createAndAppendElement, genresFragment, authorsFragment} from "./helpers.js";
 
 /**
  * My query selectors for html elements. UI parts such as buttons, overlays, search fields... Used to manipulate the DOM later in the code.
@@ -79,7 +78,7 @@ function createPreview(book) {
  * Actions.submit gathers user settings from the dataSettingsTheme element.
  * It creates a userSettings object, with property 'theme' and value is obtained from 'dataSettingsTheme's value. It collects the theme.
  * Calls the applyUserSettings function, passing the userSettings object as an argument, to update theme.
- *
+ * Gathers user settings from the theme and applies them using the applyUserSettings function.
  * List.updateRemaining calculates the number of remaining items in the matches array based on the current page and the number of items per page.
  * Updates the text and disabled state of the "Show more" button (dataListButton) based on the calculated number of remaining items.
  * The button's text is set to display the remaining items count, or 0 if there are no remaining items.
@@ -102,6 +101,9 @@ const actions = {
             dataListButton.value = `Show more (${remainingItems > 0 ? remainingItems : 0})`;
             dataListButton.disabled = !(remainingItems > 0);
             updateRemainingCount(remainingItems);
+            console.log(remainingItems);
+            //seperate
+            //update again
         }
     }
 };
@@ -151,6 +153,7 @@ dataListButton.innerHTML = /* html */
     `
     <span>Show more</span>
     <span class="list__remaining"> (${matches.length - page * BOOKS_PER_PAGE > 0 ? matches.length - page * BOOKS_PER_PAGE : 0})</span>`
+
 
 //Event listeners are attached to various elements, such as the search and settings buttons, cancel buttons, and the "Show more" button.
 //These listeners handle actions like opening/closing overlays, submitting search/settings forms, and displaying more book previews.
@@ -217,7 +220,7 @@ dataListClose.addEventListener('click', () => {
  * Appends the created previews to the 'dataListItems' element in the DOM.
  * Updates the page variable to the new page, indicating that the next page should be loaded next time the button is clicked.
  * Calls the updateRemaining function to recalculate and update the remaining items count and the state of the "Show more" button based on the current page and the number of items per page.
- * @param {}
+ *
  */
 dataListButton.addEventListener('click', () => {
     const newPage = page + 1;
@@ -237,7 +240,7 @@ dataListButton.addEventListener('click', () => {
     dataListItems.appendChild(previewsFragment);
 
     page = newPage;
-    actions.list.updateRemaining();
+    actions.list.updateRemaining()
 });
 
 /**
@@ -317,7 +320,9 @@ dataSearchForm.addEventListener('submit', (event) => {
     dataListButton.value = `Show more (${remainingItems > 0 ? remainingItems : 0})`;
     dataListButton.disabled = !(remainingItems > 0);
 
-    dataListItems.searchResults = result;
+    const remainingCountElement = document.querySelector('.list__remaining');
+    remainingCountElement.innerText = ` (${remainingItems})`;
+//end the search
 
 });
 
